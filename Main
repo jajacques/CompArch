@@ -3,26 +3,63 @@
 main(){
   char MainMemory[5000];
   
-  LoadProgramCode();
+  int MemCount = 0;
+  LoadProgramCode(MemCount);
 }
 
-LoadProgramCode(){
+int LoadProgramCode(int MemCount){
   int readinstr;
   ifstream input(INF);
   if(!input.good()) fatal("failed to open");
   for(;;){
     string temp;
     getline(input, temp);
-    int readinstr = atoi (temp);
-    char firstbyte = readinstr & 0xFF;
-    char secondbyte = (readinstr & >> 8) & 0xFF;
-    char thirdbyte = (readinstr & >> 12) & 0xFF;
-    char fourthbyte = (readinstr & >> 16) & 0xFF;
-    char fifthbyte = (readinstr & >> 20) & 0xFF;
-    char sixthbyte = (readinstr & >> 24) & 0xFF;
-    char seventhbyte = (readinstr & >> 28) & 0xFF;
-    char eighthbyte = (readinstr & >> 32) & 0xFF;
+    strtoul(temp);
+    MainMemory[MemCount] = temp & 0xFF;
+    MainMemory[MemCount + 1] = (temp >> 2) & 0xFF;
+    MainMemory[MemCount + 2] = (temp >> 4) & 0xFF;
+    MainMemory[MemCount + 3] = (temp >> 6) & 0xFF;
    }
-  //More to be done??
 }
-   
+
+int ReadMemory(int address, int WordByteHalf){
+
+}
+
+//
+//  main.cpp
+//  Tester
+//
+//  Created by Jillian Jacques on 5/6/17.
+//  Copyright © 2017 Jillian Jacques. All rights reserved.
+//
+
+#include "tools.hpp"
+
+#define INF "File"
+
+using namespace std;
+unsigned int MainMemory[5000];
+
+int main(int argc, const char * argv[]) {
+    string temp;
+    string initial;
+    ifstream input(INF);
+    if(!input.good()) cout << "File was not able to be opened";
+    
+    int k =0;
+    for(;;){
+        getline(input, initial);
+        for(int i = 0; i < initial.size();){
+            for(int j = 0; j < 2; j++){
+                temp[j] = initial[i];
+                i++;
+            }
+            unsigned long x = stoul(temp, nullptr, 10);
+            MainMemory[k] = x;
+            k++;
+        }
+        if(input.eof()) break;
+    }
+    cout << MainMemory << endl;
+}
