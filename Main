@@ -1,3 +1,28 @@
+#define INF "input.txt"
+
 main(){
-//Main here
+  char MainMemory[5000];
+  
+  LoadProgramCode();
 }
+
+LoadProgramCode(){
+  int readinstr;
+  ifstream input(INF);
+  if(!input.good()) fatal("failed to open");
+  for(;;){
+    string temp;
+    getline(input, temp);
+    int readinstr = atoi (temp);
+    char firstbyte = readinstr & 0xFF;
+    char secondbyte = (readinstr & >> 8) & 0xFF;
+    char thirdbyte = (readinstr & >> 12) & 0xFF;
+    char fourthbyte = (readinstr & >> 16) & 0xFF;
+    char fifthbyte = (readinstr & >> 20) & 0xFF;
+    char sixthbyte = (readinstr & >> 24) & 0xFF;
+    char seventhbyte = (readinstr & >> 28) & 0xFF;
+    char eighthbyte = (readinstr & >> 32) & 0xFF;
+   }
+  //More to be done??
+}
+   
